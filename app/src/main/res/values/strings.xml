@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Annonce86</string>
+    <!-- Menu Drawer Strings -->
+    <string name="ad">Categories</string>
+    <string name="ad_voiture">Voiture</string>
+    <string name="ad_moto">Moto</string>
+    <string name="ad_pc">Ordinates</string>
+    <string name="ad_mobile">Mobile</string>
+    <string name="ad_tech">Tech</string>
+    <string name="acc">Account</string>
+    <string name="acc_login">Login</string>
+    <string name="acc_logout">Logout</string>
+    <string name="acc_sign">SignUp</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+</resources>
