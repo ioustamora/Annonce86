@@ -7,21 +7,24 @@ import android.widget.Toast
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import com.google.android.material.navigation.NavigationView
-import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.main_content.*
+import eu.saveliev.annonce86.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+    private lateinit var rootElement:ActivityMainBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        rootElement = ActivityMainBinding.inflate(layoutInflater)
+        val view = rootElement.root
+        setContentView(view)
         init()
     }
 
     private fun init() {
-        val toggle = ActionBarDrawerToggle(this, drawerLayaut, toolbar, R.string.open, R.string.close)
-        drawerLayaut.addDrawerListener(toggle)
+        val toggle = ActionBarDrawerToggle(this, rootElement.drawerLayaut, rootElement.mainContent.toolbar, R.string.open, R.string.close)
+        rootElement.drawerLayaut.addDrawerListener(toggle)
         toggle.syncState()
-        navView.setNavigationItemSelectedListener(this)
+        rootElement.navView.setNavigationItemSelectedListener(this)
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -51,7 +54,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 Toast.makeText(this, "login", Toast.LENGTH_LONG).show()
             }
         }
-        drawerLayaut.closeDrawer(GravityCompat.START)
+        rootElement.drawerLayaut.closeDrawer(GravityCompat.START)
         return true
     }
 }

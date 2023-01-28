@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "1083748883674",
+    "project_id": "saveliev-eu",
+    "storage_bucket": "saveliev-eu.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1083748883674:android:1d02f1ef17d255a3eb19e3",
+        "android_client_info": {
+          "package_name": "eu.saveliev.annonce86"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1083748883674-vm6a8qtprphp92vf1udlbd3tb7r7dnac.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDOTixvPeeSy80_1FmNKNXpc0Ve82tlgcE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1083748883674-vm6a8qtprphp92vf1udlbd3tb7r7dnac.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
