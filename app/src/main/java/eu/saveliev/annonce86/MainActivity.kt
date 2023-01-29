@@ -8,9 +8,11 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.view.GravityCompat
 import com.google.android.material.navigation.NavigationView
 import eu.saveliev.annonce86.databinding.ActivityMainBinding
+import eu.saveliev.annonce86.dialoghelper.DialogHelper
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var rootElement:ActivityMainBinding
+    private val dialogHelper = DialogHelper(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,7 +47,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                 Toast.makeText(this, "mobile", Toast.LENGTH_LONG).show()
             }
             R.id.id_acc_sign -> {
-                Toast.makeText(this, "signin", Toast.LENGTH_LONG).show()
+                dialogHelper.createSignDialog()
+                //Toast.makeText(this, "signin", Toast.LENGTH_LONG).show()
             }
             R.id.id_acc_logout -> {
                 Toast.makeText(this, "logout", Toast.LENGTH_LONG).show()

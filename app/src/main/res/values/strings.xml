@@ -13,4 +13,13 @@
     <string name="acc_sign">SignUp</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <!-- Sign Dialog -->
+    <string name="email_hint">Email</string>
+    <string name="password_hint">Password</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="sign_up_action">Sign me up!</string>
+    <string name="log_in">Login</string>
+    <string name="log_in_action">Log me in!</string>
+    <string name="log_out">Logout</string>
+    <string name="forget_password">Forget Password</string>
 </resources>
