@@ -13,6 +13,7 @@
     <string name="acc_sign">SignUp</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="not_reg">Please Login or SignUp!</string>
     <!-- Sign Dialog -->
     <string name="email_hint">Email</string>
     <string name="password_hint">Password</string>
@@ -20,6 +21,10 @@
     <string name="sign_up_action">Sign me up!</string>
     <string name="log_in">Login</string>
     <string name="log_in_action">Log me in!</string>
+    <string name="log_in_error">Login error!</string>
     <string name="log_out">Logout</string>
     <string name="forget_password">Forget Password</string>
+    <string name="signup_error">Auth Error!</string>
+    <string name="send_verification_email_error">Email Verification Error!</string>
+    <string name="send_verification_email_sent">Verification email was sent on your address!</string>
 </resources>
