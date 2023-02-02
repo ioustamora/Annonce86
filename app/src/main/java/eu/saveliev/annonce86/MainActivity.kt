@@ -1,7 +1,9 @@
 package eu.saveliev.annonce86
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import android.widget.TextView
 import android.widget.Toast
@@ -13,6 +15,7 @@ import com.google.firebase.auth.FirebaseUser
 import eu.saveliev.annonce86.databinding.ActivityMainBinding
 import eu.saveliev.annonce86.dialoghelper.DialogConst
 import eu.saveliev.annonce86.dialoghelper.DialogHelper
+import eu.saveliev.annonce86.dialoghelper.GoogleAccConst
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
     private lateinit var tvAccount: TextView
@@ -26,6 +29,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val view = rootElement.root
         setContentView(view)
         init()
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if(requestCode == GoogleAccConst.GOOGLE_SIGN_IN_REQUEST_CODE) {
+            Log.d("My Log", "Sign in result")
+        }
+        super.onActivityResult(requestCode, resultCode, data)
     }
 
     override fun onStart() {
