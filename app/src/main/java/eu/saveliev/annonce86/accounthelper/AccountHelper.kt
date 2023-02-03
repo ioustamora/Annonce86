@@ -5,6 +5,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseUser
+import com.google.firebase.auth.GoogleAuthProvider
 import eu.saveliev.annonce86.MainActivity
 import eu.saveliev.annonce86.R
 import eu.saveliev.annonce86.dialoghelper.GoogleAccConst
@@ -37,6 +38,14 @@ class AccountHelper(private val act: MainActivity) {
         signInClient = getSignInClient()
         val intent = signInClient.signInIntent
         act.startActivityForResult(intent, GoogleAccConst.GOOGLE_SIGN_IN_REQUEST_CODE)
+    }
+    fun signInWithFirebaseGoogle(token: String) {
+        val credential = GoogleAuthProvider.getCredential(token, null)
+        act.mAuth.signInWithCredential(credential).addOnCompleteListener { task ->
+            if(task.isSuccessful) {
+                Toast.makeText(act, "Sign In is done!", Toast.LENGTH_LONG).show()
+            }
+        }
     }
 
     fun loginWithEmail(email: String, password: String) {
