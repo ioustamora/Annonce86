@@ -1,13 +1,18 @@
 package eu.saveliev.annonce86.accounthelper
 
+import android.util.Log
 import android.widget.Toast
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException
+import com.google.firebase.auth.FirebaseAuthUserCollisionException
+import com.google.firebase.auth.FirebaseAuthWeakPasswordException
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
 import eu.saveliev.annonce86.MainActivity
 import eu.saveliev.annonce86.R
+import eu.saveliev.annonce86.constants.FirebaseAuthConstants
 import eu.saveliev.annonce86.dialoghelper.GoogleAccConst
 
 class AccountHelper(private val act: MainActivity) {
@@ -20,8 +25,24 @@ class AccountHelper(private val act: MainActivity) {
                     sendEmailVerification(task.result?.user!!)
                     act.uiUpdate(task.result?.user)
                 } else {
-
                     Toast.makeText(act, act.resources.getString(R.string.signup_error), Toast.LENGTH_LONG).show()
+
+                    if (task.exception is FirebaseAuthUserCollisionException) {
+                        val exception = task.exception as FirebaseAuthUserCollisionException
+                        if(exception.errorCode == FirebaseAuthConstants.ERROR_EMAIL_ALREADY_IN_USE) {
+                            Toast.makeText(act, FirebaseAuthConstants.ERROR_EMAIL_ALREADY_IN_USE, Toast.LENGTH_LONG).show()
+                        }
+                    } else if (task.exception is FirebaseAuthInvalidCredentialsException) {
+                        val exception = task.exception as FirebaseAuthInvalidCredentialsException
+                        if(exception.errorCode == FirebaseAuthConstants.ERROR_INVALID_EMAIL) {
+                            Toast.makeText(act, FirebaseAuthConstants.ERROR_INVALID_EMAIL, Toast.LENGTH_LONG).show()
+                        }
+                    } else if (task.exception is FirebaseAuthWeakPasswordException) {
+                        val exception = task.exception as FirebaseAuthWeakPasswordException
+                        if(exception.errorCode == FirebaseAuthConstants.ERROR_WEAK_PASSWORD) {
+                            Toast.makeText(act, FirebaseAuthConstants.ERROR_WEAK_PASSWORD, Toast.LENGTH_LONG).show()
+                        }
+                    }
                 }
             }
         }
@@ -29,7 +50,7 @@ class AccountHelper(private val act: MainActivity) {
 
     private fun getSignInClient():GoogleSignInClient {
         val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(act.getString(R.string.default_web_client_id)).build()
+            .requestIdToken(act.getString(R.string.default_web_client_id)).requestEmail().build()
 
         return GoogleSignIn.getClient(act, gso)
     }
@@ -44,6 +65,7 @@ class AccountHelper(private val act: MainActivity) {
         act.mAuth.signInWithCredential(credential).addOnCompleteListener { task ->
             if(task.isSuccessful) {
                 Toast.makeText(act, "Sign In is done!", Toast.LENGTH_LONG).show()
+                act.uiUpdate(task.result?.user)
             }
         }
     }
@@ -54,8 +76,16 @@ class AccountHelper(private val act: MainActivity) {
                 if (task.isSuccessful) {
                     act.uiUpdate(task.result?.user)
                 } else {
+                    Log.d("My Log", "Exception: ${task.exception}")
+                    if (task.exception is FirebaseAuthUserCollisionException) {
+                        val exception = task.exception as FirebaseAuthUserCollisionException
 
-                    Toast.makeText(act, act.resources.getString(R.string.log_in_error), Toast.LENGTH_LONG).show()
+                        if(exception.errorCode == FirebaseAuthConstants.ERROR_INVALID_EMAIL) {
+                            Toast.makeText(act, FirebaseAuthConstants.ERROR_INVALID_EMAIL, Toast.LENGTH_LONG).show()
+                        } else if(exception.errorCode == FirebaseAuthConstants.ERROR_WRONG_PASSWORD) {
+                            Toast.makeText(act, FirebaseAuthConstants.ERROR_WRONG_PASSWORD, Toast.LENGTH_LONG).show()
+                        }
+                    }
                 }
             }
         }

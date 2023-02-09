@@ -38,7 +38,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             //Log.d("My Log", "Sign in result")
             val task = GoogleSignIn.getSignedInAccountFromIntent(data)
             try {
-               // val account =
+                val account = task.getResult(ApiException::class.java)
+                if (account != null) {
+                    dialogHelper.accHelper.signInWithFirebaseGoogle(account.idToken!!)
+                }
             } catch (e: ApiException) {
                 Log.d("My Log", "Api error: ${e.message}")
             }

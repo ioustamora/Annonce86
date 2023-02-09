@@ -14,7 +14,15 @@
       },
       "oauth_client": [
         {
-          "client_id": "1083748883674-vm6a8qtprphp92vf1udlbd3tb7r7dnac.apps.googleusercontent.com",
+          "client_id": "1083748883674-93fn0g1gnmf65tkun0p04f3ujgmv0vr9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "eu.saveliev.annonce86",
+            "certificate_hash": "e04cecb52e6a54355c37ee4bd6de56a497a83116"
+          }
+        },
+        {
+          "client_id": "1083748883674-tpkjanegij1r932ls5udvk3hlk3f21mn.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
@@ -27,7 +35,7 @@
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "1083748883674-vm6a8qtprphp92vf1udlbd3tb7r7dnac.apps.googleusercontent.com",
+              "client_id": "1083748883674-tpkjanegij1r932ls5udvk3hlk3f21mn.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

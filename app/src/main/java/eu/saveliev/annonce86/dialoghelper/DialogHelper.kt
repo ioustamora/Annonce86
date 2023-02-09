@@ -9,7 +9,7 @@ import eu.saveliev.annonce86.databinding.SignDialogBinding
 
 class DialogHelper(private val act: MainActivity) {
 
-    private val accHelper = AccountHelper(act)
+    val accHelper = AccountHelper(act)
     fun createSignDialog(index: Int) {
         val builder = AlertDialog.Builder(act)
         val rootDialogElement = SignDialogBinding.inflate(act.layoutInflater)
