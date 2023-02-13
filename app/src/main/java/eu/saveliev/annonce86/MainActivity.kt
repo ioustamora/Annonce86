@@ -4,6 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Menu
 import android.view.MenuItem
 import android.widget.TextView
 import android.widget.Toast
@@ -14,6 +15,7 @@ import com.google.android.gms.common.api.ApiException
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import eu.saveliev.annonce86.act.EditAddsAct
 import eu.saveliev.annonce86.databinding.ActivityMainBinding
 import eu.saveliev.annonce86.dialoghelper.DialogConst
 import eu.saveliev.annonce86.dialoghelper.DialogHelper
@@ -31,6 +33,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val view = rootElement.root
         setContentView(view)
         init()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.id_new_add) {
+            val i = Intent(this, EditAddsAct::class.java)
+            startActivity(i)
+        }
+        return super.onOptionsItemSelected(item)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -55,11 +65,17 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun init() {
+        setSupportActionBar(rootElement.mainContent.toolbar)
         val toggle = ActionBarDrawerToggle(this, rootElement.drawerLayaut, rootElement.mainContent.toolbar, R.string.open, R.string.close)
         rootElement.drawerLayaut.addDrawerListener(toggle)
         toggle.syncState()
         rootElement.navView.setNavigationItemSelectedListener(this)
         tvAccount = rootElement.navView.getHeaderView(0).findViewById(R.id.tvAccountEmail)
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return super.onCreateOptionsMenu(menu)
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
@@ -81,15 +97,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             R.id.id_acc_sign -> {
                 dialogHelper.createSignDialog(DialogConst.SIGNUP_STATE)
-                //Toast.makeText(this, "signin", Toast.LENGTH_LONG).show()
             }
             R.id.id_acc_logout -> {
                 uiUpdate(null)
-                Toast.makeText(this, "logout", Toast.LENGTH_LONG).show()
+                mAuth.signOut()
+                dialogHelper.accHelper.signOutWithGoogle()
             }
             R.id.id_acc_login -> {
                 dialogHelper.createSignDialog(DialogConst.LOGIN_STATE)
-                //Toast.makeText(this, "login", Toast.LENGTH_LONG).show()
             }
         }
         rootElement.drawerLayaut.closeDrawer(GravityCompat.START)

@@ -29,4 +29,7 @@
     <string name="signup_error">Auth Error!</string>
     <string name="send_verification_email_error">Email Verification Error!</string>
     <string name="send_verification_email_sent">Verification email was sent on your address!</string>
+    <!-- Auth -->
+    <string name="link_done">Email merged with G!</string>
+    <string name="enter_to_g">Email already in use! Sign In to merge!</string>
 </resources>
