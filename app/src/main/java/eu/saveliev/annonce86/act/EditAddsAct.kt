@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.widget.ArrayAdapter
 import eu.saveliev.annonce86.R
 import eu.saveliev.annonce86.databinding.ActivityEditAddsBinding
+import eu.saveliev.annonce86.dialogs.DialogSpinnerHelper
 import eu.saveliev.annonce86.utils.CityHelper
 
 class EditAddsAct : AppCompatActivity() {
@@ -14,8 +15,8 @@ class EditAddsAct : AppCompatActivity() {
         rootElement = ActivityEditAddsBinding.inflate(layoutInflater)
         setContentView(rootElement.root)
 
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, CityHelper.getAllCountries(this))
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        rootElement.spCountry.adapter = adapter
+        val listCountries = CityHelper.getAllCountries(this)
+        val dialog = DialogSpinnerHelper()
+        dialog.ShowSpinnerDialog(this, listCountries)
     }
 }
