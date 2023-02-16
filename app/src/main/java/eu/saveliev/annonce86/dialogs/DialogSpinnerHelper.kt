@@ -14,18 +14,19 @@ class DialogSpinnerHelper {
     fun ShowSpinnerDialog(context: Context, list: ArrayList<String>) {
         val builder = AlertDialog.Builder(context)
         val rootView = LayoutInflater.from(context).inflate(R.layout.spinner_layout, null)
-        val adapter = RcViewDialogSpinner()
+        var dialog = builder.create()
+        val adapter = RcViewDialogSpinnerAdapter(context, dialog)
         val rcView = rootView.findViewById<RecyclerView>(R.id.rcSpView)
         val sv = rootView.findViewById<SearchView>(R.id.svSpinner )
         rcView.layoutManager = LinearLayoutManager(context)
         rcView.adapter = adapter
-        builder.setView(rootView)
+        dialog.setView(rootView)
         adapter.updateAdapter(list)
         setSearchViewListener(adapter,list, sv)
-        builder.show()
+        dialog.show()
     }
 
-    private fun setSearchViewListener(adapter: RcViewDialogSpinner, list: ArrayList<String>, sv: SearchView?) {
+    private fun setSearchViewListener(adapter: RcViewDialogSpinnerAdapter, list: ArrayList<String>, sv: SearchView?) {
         sv?.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
